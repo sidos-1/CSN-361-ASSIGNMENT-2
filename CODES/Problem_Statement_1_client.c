@@ -7,35 +7,33 @@
 #include <sys/socket.h>
 #include <sys/un.h>
 
-#define PORT 8875 // we can use any valid port number
+#define PORT 8080 // we can use any valid port number
 
 void chat(int sock)
 {
     char msg[128] ;
-    char *message = msg;
     int c = 0;
 
     while(1)
     {
-        memset(&msg[0], 0, sizeof(msg));
+        bzero(msg,sizeof(msg));
         c = 0;
         printf("Client : ");
-        scanf(" %[^\n]s", msg);
-        
-        
+        while ((msg[c++] = getchar()) != '\n') 
+            ;
+
         // printf("Client : %s\n", msg);
 
         send(sock, msg, sizeof(msg) - 1,0);
+
+        bzero(msg,sizeof(msg));
+        recv(sock, msg, sizeof(msg), 0) ;
+        printf("Server :%s\n", msg);
         if (strncmp("exit", msg, 4) == 0) 
         { 
-            printf("Server Exit...\n"); 
+            printf("Client Exit...\n"); 
             break; 
         } 
-
-        memset(&msg[0], 0, sizeof(msg));
-        recv(sock, msg, sizeof(msg) - 1, 0) ;
-        printf("Server :%s\n", msg);
-
         
     }
 }
@@ -44,7 +42,7 @@ int main()
 {
     // char *file = argv[1] ;
 
-    const char* server_name = "127.0.0.1";
+    const char* name = "localhost";
 	const int server_port = PORT;
 
     int client_socket, connection;
@@ -59,23 +57,21 @@ int main()
         return 0;
     } 
 
-
     bzero(&client, sizeof(client));
 
     client.sin_family = AF_INET;
-	inet_pton(AF_INET, server_name, &client.sin_addr);  //  creates binary representation of server name and stores it as sin_addr
+	inet_pton(AF_INET, name, &client.sin_addr);  //  creates binary representation of server name and stores it as sin_addr
     client.sin_port = htons(PORT); // // will convert into required format
 
 
-    connect(client_socket, (struct sockaddr*)&client, (socklen_t)(sizeof(client))) ; // establishing connection between client and server
-
-    if(connection < 0)
+    
+    if(connect(client_socket, (struct sockaddr*)&client, (socklen_t)(sizeof(client))))  // establishing connection between client and server
     {
         printf("Error in connect()\n");
         return 0;
     }
 
-    printf("Type \"exit\" for exiting the chat (from client)\n" ) ;
+    printf("Type \"exit\" for exiting the chat (from server)\n" ) ;
     chat(client_socket) ; // Function for chatting 
 
     close(client_socket);
