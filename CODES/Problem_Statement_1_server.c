@@ -14,19 +14,18 @@ void chat(int sock)
     char msg[128] ;
     char *message = msg;
     int c = 0;
-
+    
     while(1)
     {
-        bzero(msg,128) ;
-        recv(sock, &msg, 128, 0) ;
+        memset(&msg[0], 0, sizeof(msg));
+        recv(sock, msg, sizeof(msg) - 1, 0) ;
         printf("Client : %s\n", msg);
-        bzero(msg,128);
+        memset(&msg[0], 0, sizeof(msg));
         c = 0;
         printf("Server : ");
-        while(msg[c++] = getchar() !='\n')
-        ;
-        printf("%s\n", msg);
-        send(sock, msg, sizeof(msg),0);
+        scanf(" %[^\n]s", msg);
+
+        send(sock, msg, sizeof(msg) - 1,0);
 
         if (strncmp("exit", msg, 4) == 0) 
         { 

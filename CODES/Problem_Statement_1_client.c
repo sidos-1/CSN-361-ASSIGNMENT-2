@@ -17,25 +17,23 @@ void chat(int sock)
 
     while(1)
     {
-        bzero(msg,128) ;
+        memset(&msg[0], 0, sizeof(msg));
         c = 0;
         printf("Client : ");
-        while(msg[c++] = getchar() !='\n')
-        ;
-        
-        printf("%s\n", msg);
+        scanf(" %[^\n]s", msg);
         
         
         // printf("Client : %s\n", msg);
-        send(sock, msg, sizeof(msg),0);
+
+        send(sock, msg, sizeof(msg) - 1,0);
         if (strncmp("exit", msg, 4) == 0) 
         { 
             printf("Server Exit...\n"); 
             break; 
         } 
 
-        bzero(msg,128);
-        recv(sock, &msg, 128, 0) ;
+        memset(&msg[0], 0, sizeof(msg));
+        recv(sock, msg, sizeof(msg) - 1, 0) ;
         printf("Server :%s\n", msg);
 
         
