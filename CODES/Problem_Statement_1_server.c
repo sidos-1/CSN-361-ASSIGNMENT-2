@@ -22,7 +22,7 @@ void chat(int sock)
         printf("Client : %s\n", msg);
         bzero(msg,128);
         c = 0;
-        while(msg[c++] = getchar() !="\n")
+        while(msg[c++] = getchar() !='\n')
         ;
         printf("Server : %s\n", msg);
         send(sock, msg, sizeof(msg),0);
