@@ -68,7 +68,7 @@ int main()
     client.sin_port = htons(PORT); // // will convert into required format
 
 
-    connect(client_socket, (struct sockaddr*)&client, (socklen_t*)(sizeof(client))) ; // establishing connection between client and server
+    connect(client_socket, (struct sockaddr*)&client, (socklen_t)(sizeof(client))) ; // establishing connection between client and server
 
     if(connection < 0)
     {
