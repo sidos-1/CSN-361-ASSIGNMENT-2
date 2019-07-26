@@ -19,10 +19,11 @@ void chat(int sock)
     {
         bzero(msg,128) ;
         c = 0;
+        printf("Client : ");
         while(msg[c++] = getchar() !='\n')
         ;
         
-        printf("Client : %s\n", msg);
+        printf("%s\n", msg);
         
         
         // printf("Client : %s\n", msg);

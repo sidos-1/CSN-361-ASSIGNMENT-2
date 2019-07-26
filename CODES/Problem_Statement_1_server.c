@@ -22,9 +22,10 @@ void chat(int sock)
         printf("Client : %s\n", msg);
         bzero(msg,128);
         c = 0;
+        printf("Server : ");
         while(msg[c++] = getchar() !='\n')
         ;
-        printf("Server : %s\n", msg);
+        printf("%s\n", msg);
         send(sock, msg, sizeof(msg),0);
 
         if (strncmp("exit", msg, 4) == 0) 
