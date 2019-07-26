@@ -61,7 +61,7 @@ int main()
     } 
 
 
-    bzero(&client, 0, sizeof(client));
+    bzero(&client, sizeof(client));
 
     client.sin_family = AF_INET;
 	inet_pton(AF_INET, server_name, &client.sin_addr);  //  creates binary representation of server name and stores it as sin_addr
