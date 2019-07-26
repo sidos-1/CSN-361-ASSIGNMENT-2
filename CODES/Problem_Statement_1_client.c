@@ -46,7 +46,7 @@ int main()
 {
     // char *file = argv[1] ;
 
-    const char* server_name = "localhost";
+    const char* server_name = "127.0.0.1";
 	const int server_port = PORT;
 
     int client_socket, connection;
