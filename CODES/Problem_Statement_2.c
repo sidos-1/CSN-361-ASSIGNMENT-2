@@ -1,6 +1,6 @@
-#include <stdio.h>
-#include<stdlib.h>
-
+#include <stdio.h> 
+#include <stdlib.h> 
+#include <unistd.h>
 
 int main()
 {
@@ -18,6 +18,7 @@ int main()
             printf("Grand Child Process --> PID : %d\t PPID : %d \n",getpid(),getppid());
             printf("Grandchild Process Completed its Execution\n\n");
             printf("Grandchild Process has entered the Zombie State\n\n");
+            exit(0) ;
         }
         else
         {
