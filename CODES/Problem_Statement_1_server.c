@@ -46,7 +46,7 @@ int main()
     if(server_socket == -1)
     {
         printf("Error in socket Creation\n");
-        exit(0);
+        return 0;
     } 
 
     bzero(&server, sizeof(server));
@@ -54,7 +54,7 @@ int main()
     if (setsockopt(server_socket, SOL_SOCKET, SO_REUSEADDR | SO_REUSEPORT, &set_soc, sizeof(set_soc))) 
     { 
         printf("setsockopt error\n") ; 
-        exit(0); 
+        return 0;; 
     } 
 
     server.sin_family = AF_INET;
@@ -64,7 +64,7 @@ int main()
     if(bind(server_socket, (struct sockaddr*)&server, sizeof(server))!=0)
     {
         printf("Error in binding\n");
-        exit(0);
+        return 0;;
     }
 
     if(listen(server_socket, 5)!=0)
@@ -77,7 +77,7 @@ int main()
     if(connection < 0)
     {
         printf("Error in accept()\n");
-        exit(0);
+        return 0;
     }
 
     printf("Type \"exit\" for exiting the chat (from server)\n" ) ;
