@@ -24,8 +24,8 @@ void chat(int sock)
         c = 0;
         while(msg[c++] = getchar() !="\n")
         ;
-
-        send(sock, msg, sizeof(msg),0) ;
+        printf("Server : %s\n", msg);
+        send(sock, msg, sizeof(msg),0);
 
         if (strncmp("exit", msg, 4) == 0) 
         { 
