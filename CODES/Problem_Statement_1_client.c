@@ -57,7 +57,7 @@ int main()
     if(client_socket == -1)
     {
         printf("Error in socket Creation\n");
-        exit(0);
+        return 0;
     } 
 
 
@@ -73,7 +73,7 @@ int main()
     if(connection < 0)
     {
         printf("Error in connect()\n");
-        exit(0);
+        return 0;
     }
 
     printf("Type \"exit\" for exiting the chat (from client)\n" ) ;
